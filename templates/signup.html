@@ -1,0 +1,12 @@
+<html>
+    <head><title>Sign Up</title></head>
+    <body>
+        <h1>SignUp Page</h1>
+        <form action="{{ url_for('create') }}" method="post">
+        <input type="text" name="firstname" placeholder="Enter First Name">
+        <input type="text" name="lastname" placeholder="Enter Last Name">
+        <input type="text" name="username" placeholder="Enter Username">
+        <input type="text" name="password" placeholder="Enter Password">
+        <button>Submit</button>
+    </form></body>
+</html>
