@@ -9,6 +9,7 @@
                 <input type="text" name="rating" placeholder="Enter rating">
                 <input type="text" name="comment" placeholder="Enter comment">
                 <button>Submit</button></form>
+        <h2>Goodreads rating :{{rating}}</h2>
         <ul>
             {% for rating in rate %}
                <li>{{ rating.rating }}</li>
