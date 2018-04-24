@@ -1,0 +1,11 @@
+<html>
+    <head><title>Books</title></head>
+    <body>
+        <h1>Searched Books :</h1>
+        <ul>
+        {% for book in curbooks %}
+            <li>{{book.title}}</li>
+        {% endfor %}
+        </ul>
+    </body>
+</html>
