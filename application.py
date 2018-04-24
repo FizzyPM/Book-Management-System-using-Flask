@@ -45,3 +45,21 @@ def search():
     if(user.password != password):
         return render_template("error.html",message="Wrong Password")
     return render_template("success.html")
+
+@app.route("/bsearch")
+def bsearch():
+    return render_template("bsearch.html")
+
+@app.route("/book",methods=["POST"])
+def book():
+    title = request.form.get("title")
+    isbn = request.form.get("isbn")
+    author = request.form.get("author")
+    if isbn is None:
+        isbn=''
+    if title is None:
+        title=''
+    if author is None:
+        author=''
+    curbooks=db.execute("SELECT * FROM books WHERE title LIKE :title AND author LIKE :author AND isbn_no LIKE :isbn ",{"title": title+'%',"author": author+'%',"isbn": isbn+'%'} ).fetchall()
+    return render_template("books.html", curbooks=curbooks)
