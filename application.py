@@ -4,6 +4,7 @@ from flask import Flask, session,render_template,request
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+import requests
 
 app = Flask(__name__)
 
@@ -74,7 +75,10 @@ def details(book_title):
     db.execute("INSERT INTO cur_book (cur_isbn,cur_tite) VALUES (:isbn, :title)",
             {"isbn": dbook.isbn_no, "title": dbook.title})
     db.commit()
-    return render_template("details.html", dbook=dbook,rate=rate)
+    res=requests.get("https://www.goodreads.com/book/review_counts.json?key=Op3LFpWFhCjos35VapSw&isbns="+dbook.isbn_no)
+    data=res.json()
+    rating=data["books"][0]["average_rating"]
+    return render_template("details.html", dbook=dbook,rate=rate,rating=rating)
 
 @app.route("/rated",methods=["POST"])
 def rated():
@@ -82,7 +86,10 @@ def rated():
     comment = request.form.get("comment")
     cur=db.execute("SELECT * FROM cur_user").fetchone()
     cbook=db.execute("SELECT * FROM cur_book").fetchone()
-    db.execute("INSERT INTO ratings (uname,isbn,rating,review) VALUES (:uname, :isbn ,:rating,:review)",
-            {"uname": cur.cur_username, "isbn": cbook.cur_isbn,"rating":rating,"review":comment})
-    db.commit()
+    try:
+        db.execute("INSERT INTO ratings (uname,isbn,rating,review) VALUES (:uname, :isbn ,:rating,:review)",
+                {"uname": cur.cur_username, "isbn": cbook.cur_isbn,"rating":rating,"review":comment})
+        db.commit()
+    except :
+        return render_template("error.html",message="Already Rated")
     return render_template("success.html")
