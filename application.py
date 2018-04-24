@@ -21,8 +21,8 @@ db = scoped_session(sessionmaker(bind=engine))
 def signup():
     return render_template("signup.html")
 
-@app.route("/create",methods=["POST"])
-def create():
+@app.route("/account",methods=["POST"])
+def account():
     fname = request.form.get("firstname")
     lname = request.form.get("lastname")
     username = request.form.get("username")
@@ -30,7 +30,7 @@ def create():
     db.execute("INSERT INTO users (fname,lname,username,password) VALUES (:fname, :lname ,:uname,:pass)",
             {"fname": fname, "lname": lname,"uname":username,"pass":password})
     db.commit()
-    return render_template("success.html")
+    return render_template("login.html")
 
 @app.route("/login")
 def login():
@@ -45,14 +45,12 @@ def search():
     user = db.execute("SELECT * FROM users WHERE username = :username", {"username": username }).fetchone()
     if(user.password != password):
         return render_template("error.html",message="Wrong Password")
+    temp=db.execute("DELETE FROM cur_user")
     db.execute("INSERT INTO cur_user (f_name,l_name,cur_username) VALUES (:fname, :lname ,:uname)",
             {"fname": user.fname, "lname": user.lname,"uname":user.username})
     db.commit()
-    return render_template("success.html")
-
-@app.route("/bsearch")
-def bsearch():
-    return render_template("bsearch.html")
+    temp2=db.execute("DELETE FROM cur_book")
+    return render_template("search.html",user=user)
 
 @app.route("/book",methods=["POST"])
 def book():
@@ -91,5 +89,5 @@ def rated():
                 {"uname": cur.cur_username, "isbn": cbook.cur_isbn,"rating":rating,"review":comment})
         db.commit()
     except :
-        return render_template("error.html",message="Already Rated")
+        return render_template("alreadyrated.html")
     return render_template("success.html")
