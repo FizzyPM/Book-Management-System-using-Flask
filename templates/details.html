@@ -1,19 +1,77 @@
 <html>
-    <head><title>Details</title></head>
+    <head>
+        <style>
+        form{
+   margin-left: 4%;
+   margin-top: 3%;
+}
+    body{
+        background-image: url("/static/details.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center; 
+        background-size: cover;
+    }
+    input[type=text]{
+    width: 20%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+button {
+    background-color: #0a166d; 
+    border: none;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 17%;
+}
+p{
+    margin-left: 43%;
+    font-weight: 700;
+}
+#heading{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-left: 27%;
+    font-weight: 900;
+    font-size:50px;
+    text-shadow: 0 0 10px #0a166d;
+}
+#api{
+    font-size: 22px;
+    color: seashell;
+}
+button{
+    margin-left: 42%;
+}
+li{
+    font-size: 19px;
+    font-weight: 600;
+    color: #000000;
+}
+</style><title>Details</title></head>
     <body>
-        <h1>Book title : {{dbook.title}}</h1>
-        Author : {{dbook.author}}
-        ISBN Number : {{dbook.isbn_no}}
-        Year : {{dbook.year}}
+        <p id="heading">Book title : {{dbook.title}}</p>
+        <p>Author : {{dbook.author}}<p>
+        <p>ISBN Number : {{dbook.isbn_no}}</p>
+        <p>Published Year : {{dbook.year}}</p>
         <form action="{{ url_for('rated') }}" method="post">
-                <input type="text" name="rating" placeholder="Enter rating">
-                <input type="text" name="comment" placeholder="Enter comment">
+               <p> <input type="text" name="rating" placeholder="Enter rating"></p>
+                <p><input type="text" name="comment" placeholder="Enter comment"></p>
                 <button>Submit</button></form>
-        <h2>Goodreads rating :{{rating}}</h2>
+        <p id="api">Goodreads rating :{{rating}}</p>
         <ul>
             {% for rating in rate %}
-               <li>{{ rating.rating }}</li>
+               <li>{{ rating.rating }} rating is given by : {{rating.uname}}</li>
             {% endfor %}
         </ul>
+        <a href "{{url_for('search')}}">Click Here</a> to go back !
+        <a href "{{url_for('login')}}">Click Here</a> to login as another user !
     </body>
 </html>

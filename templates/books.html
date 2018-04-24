@@ -1,11 +1,44 @@
 <html>
-    <head><title>Books</title></head>
+    <head><style>
+     body{
+        background-image: url("/static/books.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center; 
+        background-size: cover;
+    }
+    #heading{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(255, 255, 255);
+    margin-left: 32%;
+    margin-top: 2%;
+    font-weight: 900;
+    font-size:50px;
+    text-shadow: 0 0 10px #012226;
+}
+a{
+    font-weight: 400;
+    color: #076570;
+}
+a:hover{
+    font-weight: bolder;
+}
+ul{
+    margin-left: 35%;
+    padding: 3%;
+}
+li{
+    font-size: 30px;
+}
+    </style><title>Books</title></head>
     <body>
-        <h1>Searched Books :</h1>
+        <p id="heading">Searched Books :</p>
         <ul>
         {% for book in curbooks %}
-            <li>{{book.title}}</li>
+           <p> <li><a href ="{{url_for('book')}}/{{book.title}}">{{book.title}}</a></li></p>
         {% endfor %}
         </ul>
+        <a href "{{url_for('search')}}">Click Here</a> to go back !
+        <a href "{{url_for('login')}}">Click Here</a> to login as another user !
     </body>
 </html>
