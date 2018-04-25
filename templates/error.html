@@ -1,7 +1,41 @@
+<!DOCTYPE html>
 <html>
-    <head><title>Oops</title></head>
-    <body>
-        <h1>Error</h1>
-        {{message}}
-    </body>
+<head>
+    <style>
+    body{
+        background-image: url("/static/error.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center; 
+        background-size: cover;
+    }
+    #heading{
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color: white;
+        margin-left: 29%;
+        margin-top: 2%;
+        font-weight: 900;
+        font-size:50px;
+        text-shadow: 0 0 10px black;
+    }
+    a{
+        font-weight: 400;
+        color: #9f9efc;
+        margin-left: 27%;
+    }
+    a:hover{
+        font-weight: bolder;
+    }
+    .links{
+        margin-left: 22%;
+        color: white;
+    }
+    </style>
+<title>Oops</title></head>
+<body>
+    <p id="heading">{{message}}</p>
+    <div class=links>
+    <p><a href="{{url_for('signup')}}">Click here</a> for Sign Up !</p>
+    <p><a href="{{url_for('login')}}">Click here</a> to login !</p></div>
+</body>
 </html>

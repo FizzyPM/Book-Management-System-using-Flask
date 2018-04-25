@@ -1,7 +1,36 @@
+<!DOCTYPE html>
 <html>
-    <head><title>Congrats</title></head>
-    <body>
-        <h1>Success</h1>
-       
-    </body>
+<head>
+    <style>
+    body{
+        background-image: url("/static/success.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center; 
+        background-size: cover;
+    }
+    #heading{
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color: #7c0202;
+        margin-left: 31%;
+        margin-top: 2%;
+        font-weight: 900;
+        font-size:50px;
+        text-shadow: 0 0 10px #050000;
+    }
+    a{
+        font-weight: 400;
+        color: #2e4851;
+        margin-left: 38%;
+    }
+    a:hover{
+        font-weight: bolder;
+    }
+    </style>
+<title>Congrats</title></head>
+<body>
+    <p id="heading">Successfully Rated</p>
+    <p><a href="{{url_for('search')}}">Click here</a> to search again !</p>
+    <p><a href="{{url_for('logout')}}">Click here</a> to logout !</p>
+</body>
 </html>

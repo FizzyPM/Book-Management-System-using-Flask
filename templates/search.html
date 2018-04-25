@@ -1,65 +1,67 @@
+<!DOCTYPE html>
 <html>
-    <head>
-            <style>
-                    form{
-                   margin-left: 30%;
-                   margin-top: 4%;
-                }
-                    body{
-                        background-image: url("/static/search.jpg");
-                        background-repeat: no-repeat;
-                        background-attachment: fixed;
-                        background-position: center; 
-                        background-size: cover;
-                    }
-                    input[type=text]{
-                    width: 50%;
-                    padding: 12px 20px;
-                    margin: 8px 0;
-                    display: inline-block;
-                    border: 1px solid #ccc;
-                    border-radius: 4px;
-                    box-sizing: border-box;
-                }
-                button {
-                    background-color: #9e0b5e; 
-                    border: none;
-                    color: white;
-                    padding: 10px 32px;
-                    text-align: center;
-                    text-decoration: none;
-                    display: inline-block;
-                    font-size: 16px;
-                    margin-left: 19%;
-                }
-                #heading{
-                    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-                    color: rgb(255, 255, 255);
-                    margin-left: 32%;
-                    margin-top: 4%; 
-                    font-weight: 900;
-                    font-size:50px;
-                    text-shadow: 0 0 10px #9e0b5e;
-                }
-                #accdata{
-                    margin-top: 12%; 
-                }
-                a{
-    font-weight: 400;
-}
-a:hover{
-    font-weight: bolder;
-}
-                    </style><title>Search</title></head>
-    <body>
+    <head><style>
+    form{
+        margin-left: 30%;
+         margin-top: 4%;
+        }
+    body{
+        background-image: url("/static/search.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center; 
+        background-size: cover;
+        }
+    input[type=text]{
+        width: 50%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+    button {
+        background-color: #9e0b5e; 
+        border: none;
+        color: white;
+        padding: 10px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-left: 19%;
+        }
+    #heading{
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color: rgb(255, 255, 255);
+        margin-left: 32%;
+        margin-top: 4%; 
+        font-weight: 900;
+        font-size:50px;
+        text-shadow: 0 0 10px #9e0b5e;
+        }
+    a{
+        font-weight: 400;
+        color:#b9b1f9;
+        }
+    a:hover{
+        font-weight: bolder;
+        }
+    #logout{
+        margin-left: 43%;
+        margin-top: 12%;
+        color: white;
+        }
+    </style>
+<title>Search</title></head>
+<body>
         <p id="heading">Search for a book !</p>
         <form action="{{ url_for('book') }}" method="post">
         <p><input type="text" name="title" placeholder="Enter Book Title"></p>
         <p><input type="text" name="isbn" placeholder="ISBN Number"></p>
         <p><input type="text" name="author" placeholder="Enter Author Name"></p>
-        <button>Submit</button>
-    </form>
-    <p id="accdata">Currently logged in as : {{user.username}} ! </p>
-    
+        <button>Submit</button></form>
+        <p id="logout"><a href="{{url_for('logout')}}">Click here</a> to logout !</p>
 </body>
 </html>

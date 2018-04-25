@@ -1,10 +1,11 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <style>
-        form{
-   margin-left: 4%;
-   margin-top: 3%;
-}
+<head>
+    <style>
+    form{
+        margin-left: 4%;
+        margin-top: 3%;
+    }
     body{
         background-image: url("/static/details.jpg");
         background-repeat: no-repeat;
@@ -13,65 +14,69 @@
         background-size: cover;
     }
     input[type=text]{
-    width: 20%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-button {
-    background-color: #0a166d; 
-    border: none;
-    color: white;
-    padding: 10px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-left: 17%;
-}
-p{
-    margin-left: 43%;
-    font-weight: 700;
-}
-#heading{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin-left: 27%;
-    font-weight: 900;
-    font-size:50px;
-    text-shadow: 0 0 10px #0a166d;
-}
-#api{
-    font-size: 22px;
-    color: seashell;
-}
-button{
-    margin-left: 42%;
-}
-li{
-    font-size: 19px;
-    font-weight: 600;
-    color: #000000;
-}
-</style><title>Details</title></head>
-    <body>
-        <p id="heading">Book title : {{dbook.title}}</p>
-        <p>Author : {{dbook.author}}<p>
-        <p>ISBN Number : {{dbook.isbn_no}}</p>
-        <p>Published Year : {{dbook.year}}</p>
-        <form action="{{ url_for('rated') }}" method="post">
-               <p> <input type="text" name="rating" placeholder="Enter rating"></p>
-                <p><input type="text" name="comment" placeholder="Enter comment"></p>
-                <button>Submit</button></form>
-        <p id="api">Goodreads rating :{{rating}}</p>
-        <ul>
-            {% for rating in rate %}
-               <li>{{ rating.rating }} rating is given by : {{rating.uname}}</li>
-            {% endfor %}
-        </ul>
-        <a href "{{url_for('search')}}">Click Here</a> to go back !
-        <a href "{{url_for('login')}}">Click Here</a> to login as another user !
-    </body>
+        width: 20%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    button {
+        background-color: #0a166d; 
+        border: none;
+        color: white;
+        padding: 10px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-left: 17%;
+    }
+    p{
+        margin-left: 39%;
+        font-weight: 700;
+    }
+    #heading{
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        margin-left: 27%;
+        font-weight: 900;
+        font-size:50px;
+        text-shadow: 0 0 10px #0a166d;
+    }
+    #api{
+        font-size: 22px;
+        color: seashell;
+    }
+    button{
+        margin-left: 40%;
+    }
+    li{
+        font-size: 19px;
+        font-weight: 600;
+        color: #001538;
+    }
+    #logout{
+        margin-left: 85%;
+        margin-top: 3%;
+    }
+    </style>
+<title>Details</title></head>
+<body>
+    <p id="heading">Book title : {{dbook.title}}</p>
+    <p>Author : {{dbook.author}}<p>
+    <p>ISBN Number : {{dbook.isbn_no}}</p>
+    <p>Published Year : {{dbook.year}}</p>
+    <form action="{{ url_for('rated') }}" method="post">
+        <p> <input type="text" name="rating" placeholder="Enter rating"></p>
+        <p><input type="text" name="comment" placeholder="Enter comment"></p>
+        <button>Submit</button></form>
+    <p id="api">Goodreads rating :{{rating}}</p>
+    <ul>
+        {% for rating in rate %}
+            <li>{{ rating.rating }} rating is given by : {{rating.uname}}</li>
+        {% endfor %}
+    </ul>
+    <p id="logout"><a href="{{url_for('logout')}}">Click here</a> to logout !</p>
+</body>
 </html>

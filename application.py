@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, session,render_template,request
+from flask import Flask, session, redirect, url_for, escape, request,render_template
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -30,27 +30,40 @@ def account():
     db.execute("INSERT INTO users (fname,lname,username,password) VALUES (:fname, :lname ,:uname,:pass)",
             {"fname": fname, "lname": lname,"uname":username,"pass":password})
     db.commit()
-    return render_template("login.html")
+    return redirect(url_for('login'))
 
-@app.route("/login")
+@app.route('/index')
+def index():
+    if 'username' in session:
+        username = session['username']
+        return redirect(url_for('search'))
+    return render_template("index2.html")
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        session['username'] = request.form['username']
+        password=request.form['password']
+        try:
+            user = db.execute("SELECT * FROM users WHERE username = :username", {"username": session['username'] }).fetchone()
+            if(user.password != password):
+                return render_template("error.html",message="Wrong Password")
+        except:
+            return render_template("error.html",message="Please fill the signup page !")
+        return redirect(url_for('index'))
     return render_template("login.html")
 
-@app.route("/search",methods=["POST"])
+@app.route('/logout')
+def logout():
+    # remove the username from the session if it is there
+    session.pop('username', None)
+    return redirect(url_for('index'))
+
+app.secret_key = '\xfd{H\xe5<\x95\xf9\xe3\x96.5\xd1\x01O<!\xd5\xa2\xa0\x9fR"\xa1\xa8'
+
+@app.route("/search")
 def search():
-    username = request.form.get("username")
-    password = request.form.get("password")
-    if db.execute("SELECT * FROM users WHERE username = :username", {"username": username}).rowcount == 0:
-        return render_template("error.html",message="No such user with that username.")
-    user = db.execute("SELECT * FROM users WHERE username = :username", {"username": username }).fetchone()
-    if(user.password != password):
-        return render_template("error.html",message="Wrong Password")
-    temp=db.execute("DELETE FROM cur_user")
-    db.execute("INSERT INTO cur_user (f_name,l_name,cur_username) VALUES (:fname, :lname ,:uname)",
-            {"fname": user.fname, "lname": user.lname,"uname":user.username})
-    db.commit()
-    temp2=db.execute("DELETE FROM cur_book")
-    return render_template("search.html",user=user)
+    return render_template("search.html")
 
 @app.route("/book",methods=["POST"])
 def book():
@@ -68,6 +81,7 @@ def book():
 
 @app.route("/book/<string:book_title>")
 def details(book_title):
+    temp2=db.execute("DELETE FROM cur_book")
     dbook = db.execute("SELECT * FROM books WHERE title = :title", {"title": book_title}).fetchone()
     rate=db.execute("SELECT * FROM ratings WHERE isbn=:isbn",{"isbn":dbook.isbn_no} ).fetchall()
     db.execute("INSERT INTO cur_book (cur_isbn,cur_tite) VALUES (:isbn, :title)",
@@ -82,12 +96,11 @@ def details(book_title):
 def rated():
     rating = request.form.get("rating")
     comment = request.form.get("comment")
-    cur=db.execute("SELECT * FROM cur_user").fetchone()
     cbook=db.execute("SELECT * FROM cur_book").fetchone()
     try:
         db.execute("INSERT INTO ratings (uname,isbn,rating,review) VALUES (:uname, :isbn ,:rating,:review)",
-                {"uname": cur.cur_username, "isbn": cbook.cur_isbn,"rating":rating,"review":comment})
+                {"uname":session['username'], "isbn": cbook.cur_isbn,"rating":rating,"review":comment})
         db.commit()
-    except :
-        return render_template("alreadyrated.html")
+    except:
+         return render_template("alreadyrated.html")
     return render_template("success.html")

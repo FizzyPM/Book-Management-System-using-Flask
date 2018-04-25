@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
-    <head><style>
+<head>
+    <style>
     form{
-   margin-left: 30%;
-   margin-top: 3%;
-}
+        margin-left: 30%;
+        margin-top: 3%;
+    }
     body{
         background-image: url("/static/signup.jpg");
         background-repeat: no-repeat;
@@ -12,59 +13,60 @@
         background-position: center; 
         background-size: cover;
     }
-    input[type=text]{
-    width: 50%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-button {
-    background-color: #0a166d; 
-    border: none;
-    color: white;
-    padding: 10px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-left: 17%;
-}
-#heading{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: rgb(255, 255, 255);
-    margin-left: 40%;
-    font-weight: 900;
-    font-size:50px;
-    text-shadow: 0 0 10px #0a166d;
-}
-#login{
-    margin-left: 35%;
-    font-size: 19px;
-    color: seashell;
-}
-a{
-    font-weight: 400;
-}
-a:hover{
-    font-weight: bolder;
-}
-    </style><title>Sign Up</title>
-    </head>
-    <body>
-        <p id="heading">Sign Up !</p>
-        <form action="{{ url_for('account') }}" method="post">
-        <p>
-        <input type="text" name="firstname" placeholder="Enter First Name"></p>
-        <p>
-        <input type="text" name="lastname" placeholder="Enter Last Name"></p>
-        <p>
-        <input type="text" name="username" placeholder="Enter Username"></p>
-        <p>
-        <input type="text" name="password" placeholder="Enter Password"></p>
-        <button>Submit</button>
+    input[type=text],[type=password]{
+        width: 50%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    button {
+        background-color: #0a166d; 
+        border: none;
+        color: white;
+        padding: 10px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-left: 17%;
+    }
+    #heading{
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color: rgb(255, 255, 255);
+        margin-left: 40%;
+        font-weight: 900;
+        font-size:50px;
+        text-shadow: 0 0 10px #0a166d;
+    }
+    #login{
+        margin-left: 35%;
+        font-size: 19px;
+        color: seashell;
+    }
+    a{
+        font-weight: 400;
+    }
+    a:hover{
+        font-weight: bolder;
+    }
+    </style>
+<title>Sign Up</title>
+</head>
+<body>
+    <p id="heading">Sign Up !</p>
+    <form action="{{ url_for('account') }}" method="post">
+    <p>
+    <input type="text" name="firstname" placeholder="Enter First Name"></p>
+    <p>
+    <input type="text" name="lastname" placeholder="Enter Last Name"></p>
+    <p>
+    <input type="text" name="username" placeholder="Enter Username"></p>
+    <p>
+    <input type="password" name="password" placeholder="Enter Password"></p>
+    <button>Submit</button>
     </form>
     <p id=login>
     Already a member ?

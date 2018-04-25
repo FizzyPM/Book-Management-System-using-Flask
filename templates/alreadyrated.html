@@ -1,7 +1,36 @@
+<!DOCTYPE html>
 <html>
-    <head><title>Oops</title></head>
-    <body>
-        <h1>Error</h1>
-        Already Rated !
-    </body>
+<head>
+    <style>
+    body{
+        background-image: url("/static/rated.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center; 
+        background-size: cover;
+    }
+    #heading{
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color: #b23800;
+        margin-left: 33%;
+        margin-top: 15%;
+        font-weight: 900;
+        font-size:50px;
+        text-shadow: 0 0 10px #6b2100;
+    }
+    a{
+        font-weight: 400;
+        color: #ed2121;
+        margin-left: 38%;
+    }
+    a:hover{
+        font-weight: bolder;
+    }
+    </style>
+<title>Oops</title></head>
+<body>
+    <p id="heading">Already Rated !</p>
+    <a href="{{url_for('search')}}">Click here</a> to search again !<br>
+    <a href="{{url_for('logout')}}">Click here</a> to logout !<br>
+</body>
 </html>

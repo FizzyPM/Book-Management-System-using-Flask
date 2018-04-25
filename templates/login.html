@@ -1,10 +1,12 @@
+<!DOCTYPE html>
 <html>
-    <head><style>
-         form{
-   margin-left: 30%;
-   margin-top: 4%;
-}
-         body{
+<head>
+    <style>
+    form{
+        margin-left: 30%;
+        margin-top: 4%;
+    }
+    body{
         background-image: url("/static/login.jpg");
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -12,40 +14,42 @@
         background-size: cover;
     }
     input[type=text],[type=password]{
-    width: 50%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-button {
-    background-color: #5b0000; 
-    border: none;
-    color: white;
-    padding: 10px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-left: 19%;
-}
-#heading{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: rgb(255, 255, 255);
-    margin-left: 39%;
-    margin-top: 5%;
-    font-weight: 900;
-    font-size:50px;
-    text-shadow: 0 0 10px #5b0000;
-}
-    </style><title>Log In</title></head>
-    <body>
-        <p id="heading">Login Page</p>
-        <form action="{{ url_for('search') }}" method="post">
-       <p> <input type="text" name="username" placeholder="Enter Username"></p>
-        <p><input type="password" name="password" placeholder="Enter Password"></p>
-        <button>Submit</button>
-    </form></body>
+        width: 50%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    button {
+        background-color: #5b0000; 
+        border: none;
+        color: white;
+        padding: 10px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-left: 19%;
+    }
+    #heading{
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color: rgb(255, 255, 255);
+        margin-left: 39%;
+        margin-top: 5%;
+        font-weight: 900;
+        font-size:50px;
+        text-shadow: 0 0 10px #5b0000;
+    }
+    </style>
+<title>Log In</title></head>
+<body>
+    <p id="heading">Login Page</p>
+    <form method="post">
+    <p> <input type="text" name="username" placeholder="Enter Username"></p>
+    <p><input type="password" name="password" placeholder="Enter Password"></p>
+    <button>Submit</button>
+    </form>
+</body>
 </html>
