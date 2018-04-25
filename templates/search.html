@@ -50,8 +50,12 @@
         }
     #logout{
         margin-left: 43%;
-        margin-top: 12%;
         color: white;
+        }
+    #user{
+        margin-left: 40%;
+        color: white;
+        margin-top: 12%;
         }
     </style>
 <title>Search</title></head>
@@ -62,6 +66,7 @@
         <p><input type="text" name="isbn" placeholder="ISBN Number"></p>
         <p><input type="text" name="author" placeholder="Enter Author Name"></p>
         <button>Submit</button></form>
+        <div id="user">Logged in as :<b> {{user}} </b></div>
         <p id="logout"><a href="{{url_for('logout')}}">Click here</a> to logout !</p>
 </body>
 </html>

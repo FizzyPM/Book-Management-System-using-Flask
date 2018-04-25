@@ -17,7 +17,14 @@ Session(app)
 engine = create_engine('postgresql://postgres:fizzzyme@localhost:5432/project1')
 db = scoped_session(sessionmaker(bind=engine))
 
-@app.route("/")
+@app.route('/')
+def index():
+    if 'username' in session:
+        username = session['username']
+        return redirect(url_for('search'))
+    return redirect(url_for('signup'))
+
+@app.route("/signup")
 def signup():
     return render_template("signup.html")
 
@@ -31,13 +38,6 @@ def account():
             {"fname": fname, "lname": lname,"uname":username,"pass":password})
     db.commit()
     return redirect(url_for('login'))
-
-@app.route('/index')
-def index():
-    if 'username' in session:
-        username = session['username']
-        return redirect(url_for('search'))
-    return render_template("index2.html")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -63,7 +63,8 @@ app.secret_key = '\xfd{H\xe5<\x95\xf9\xe3\x96.5\xd1\x01O<!\xd5\xa2\xa0\x9fR"\xa1
 
 @app.route("/search")
 def search():
-    return render_template("search.html")
+    user=session['username']
+    return render_template("search.html",user=user)
 
 @app.route("/book",methods=["POST"])
 def book():
