@@ -3,7 +3,7 @@
 Made with Python and JavaScript. 
 
 1) Create a virtual environment and install the following packages:
-> Flask, flask_session, sqlalchemy, requests, psycopg2
+* Flask, flask_session, sqlalchemy, requests, psycopg2
  
 2) Install **postgresql** and Add the following tables to the database:
 * CREATE TABLE users (
